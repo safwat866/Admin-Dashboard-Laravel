@@ -1,0 +1,116 @@
+/* Auth Styles */
+.form,
+nav {
+    margin: auto;
+}
+.submit-button,
+button {
+    color: #fff;
+    transition: background 0.3s;
+}
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 100px;
+    background: #009688;
+    color: #fff;
+}
+button {
+    border: none;
+    padding: 10px 17px;
+    background: #0e645c;
+    border-radius: 0.25em;
+    margin-right: 20px;
+}
+button:hover {
+    background: #044c46;
+}
+.error-text {
+    display: block;
+}
+.form {
+    max-width: 410px;
+    padding-top: 100px;
+    padding-inline: 10px;
+}
+.form-inputs {
+    margin-top: 35px;
+}
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+.inputs .input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    outline: None;
+    color: #495057;
+    transition: 0.3s;
+}
+.inputs > .input:focus {
+    border-color: #80bdff;
+}
+.form-control {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.submit-button {
+    background: #3f51b5;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 8px 12px;
+    margin: 0;
+    margin: 10px 0 0 0;
+    width: 100%;
+}
+.submit-button:hover {
+    background: #263bb1;
+}
+.error-text {
+    color: red;
+}
+.error-input {
+    border-color: red !important;
+    /* color: red !important; */
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+}
+.password {
+    flex: 1;
+}
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    color: #495057;
+    cursor: pointer;
+}
+
+.hr {
+    border-bottom: 1px solid #c9c9c9;
+    width: 100%;
+    display: block;
+    margin-top: 25px;
+    position: relative;
+}
+
+.hr::after {
+    content: "or";
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 5px 10px;
+}
+/* End Auth styles */
