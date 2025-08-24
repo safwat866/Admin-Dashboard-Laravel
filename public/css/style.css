@@ -3,8 +3,7 @@
 nav {
     margin: auto;
 }
-.submit-button,
-button {
+.submit-button {
     color: #fff;
     transition: background 0.3s;
 }
@@ -15,18 +14,25 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-inline: 100px;
-    background: #009688;
-    color: #fff;
+    /* background: #009688; */
+    box-shadow: 0px 10px 10px #00000011;
+    color: #000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background-color: #Fff;
 }
-button {
+button.logout {
     border: none;
     padding: 10px 17px;
     background: #0e645c;
     border-radius: 0.25em;
-    margin-right: 20px;
+    margin-right: 60px;
+    color: white;
 }
-button:hover {
+button.logout:hover {
     background: #044c46;
 }
 .error-text {
@@ -44,7 +50,7 @@ button:hover {
     display: flex;
     flex-direction: column;
 }
-.inputs .input {
+.input {
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
@@ -52,7 +58,7 @@ button:hover {
     color: #495057;
     transition: 0.3s;
 }
-.inputs > .input:focus {
+.input:focus {
     border-color: #80bdff;
 }
 .form-control {

@@ -25,6 +25,6 @@ class LoginController extends Controller
 
         Cookie::queue('user_id', $user->id, 60 * 24);
 
-        return redirect()->route('/');
+        return redirect("/");
     }
 }

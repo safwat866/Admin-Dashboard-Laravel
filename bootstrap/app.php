@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckUser;
+use App\Http\Middleware\DashboardMiddleWare;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'checkUser' => CheckUser::class,
+            'isAdmin' => DashboardMiddleWare::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

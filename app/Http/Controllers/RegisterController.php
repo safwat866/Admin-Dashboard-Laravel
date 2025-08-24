@@ -27,6 +27,6 @@ class RegisterController extends Controller
 
         Cookie::queue('user_id', $userId->id, 60 * 24);
          
-        return redirect()->route('/');
+        return redirect('/');
     }
 }

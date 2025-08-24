@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layout')
 
 @section("title", "Dashboard")
 
@@ -7,17 +7,31 @@
         h1 {
             text-align: center
         }
+        h2 {
+            margin-left: 60px;
+        }
+        .main_body {
+            margin-right: 300px;
+            margin-top: 75px;
+            padding: 20px;
+            height: 100vh;
+            background: #fff;
+            direction: rtl;
+        }
     </style>
 @endpush
 
 @section("content")
-    <nav>
-        <h2>Dashboard</h2>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
 
-    <h1>Welcome {{$user->username}}</h1>
+    @include("layouts.nav")
+
+    @include("layouts.sidebar", ['user' => $user])
+
+
+    <div class="main_body">
+        @yield("main_content")
+    </div>
+
+
+
 @endsection

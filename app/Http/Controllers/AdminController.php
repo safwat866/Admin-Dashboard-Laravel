@@ -6,13 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
-class ShowUser extends Controller
+class AdminController extends Controller
 {
-    public function show() {
+    public function index() {
         $userId = Cookie::get('user_id');
 
         $user = User::where("id", $userId)->first();
 
-       return view("home", compact("user"));
+        return view("pages.dashboard", compact("user"));
     }
 }
