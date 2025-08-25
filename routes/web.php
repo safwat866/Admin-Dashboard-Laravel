@@ -8,8 +8,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ShowUser;
 use App\Http\Controllers\UserController;
+use \App\Http\Controllers\VerifyPayment;
 use Illuminate\Support\Facades\Route;
 
 // Main Routes
@@ -26,6 +26,9 @@ Route::post("/dashboard/users/update", [UserController::class, 'update'])->name(
 Route::resource('/cart', CartController::class);
 
 Route::post("/checkout", [CheckoutController::class, "index"])->name("checkout");
+
+Route::get('/payments/verify/{payment?}' , [VerifyPayment::class, "handleCallback"])->name('verify-payment');
+
 // Auth
 Route::get('/login', function () {
     return view('auth.login');
@@ -40,3 +43,4 @@ Route::get("/register", function () {
 Route::post('register/handle', [RegisterController::class, 'createUser'])->name('register.handle');
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+

@@ -81,7 +81,6 @@
                                 <button type="submit" class="table_btn delete">Delete</button>
                             </form>
                         </th>
-
                     </tr>
                 @endforeach
             </tbody>

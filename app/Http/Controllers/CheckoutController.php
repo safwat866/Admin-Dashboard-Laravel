@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Nafezly\Payments\Classes\PaymobPayment;
 
 class CheckoutController extends Controller
 {
@@ -15,21 +16,17 @@ class CheckoutController extends Controller
         $total = array_reduce($cart_items_json, function($carry, $item) {
             return $carry + $item["product"]["product_price"];
         });
-
         $user_balance = $user->cash;
 
         if ($total > $user_balance) {
             return back()->withErrors(["balance" => "You Don't have Enought Balance!"]);
         }
-        
-        $availble_cash = $user_balance - $total;
 
-        $user->update([
-            'cash' => $availble_cash,
-        ]);
+        $payment = new PaymobPayment();
 
-        Cart::where("user_id", $request->id)->delete();
+        $response = $payment->pay($total, $user->id, $user->username, "user", $user->email, '01034397020');
 
-        return redirect()->route('/');
+        return redirect($response["redirect_url"]);
+
     }
 }
