@@ -51,8 +51,8 @@
     <div class="account_info">
         <div class="user_image" ></div>
         <div class="user_info">
-            <h3 style="font-size: 18px; margin-block: 8px;">{{$user->username}}</h3>
-            <p style='font-size: 14px; color: #aaaaaa;'>{{$user->email}}</p>
+            <h3 style="font-size: 18px; margin-block: 8px;">{{auth()->user()->username}}</h3>
+            <p style='font-size: 14px; color: #aaaaaa;'>{{auth()->user()->email}}</p>
         </div>
     </div>
     <div class="links">
@@ -68,8 +68,8 @@
                 <div class="title">قائمة المنتجات</div>
             </a>
         </div>
-        <div class="link {{Route::currentRouteName() == 'dashboard.users' ? 'active' : '' }}">
-            <a href="{{route("dashboard.users")}}">
+        <div class="link {{Route::currentRouteName() == 'users.index' ? 'active' : '' }}">
+            <a href="{{route("users.index")}}">
                 <div class="icon"></div>
                 <div class="title">قائمة المستخدمين</div>
             </a>

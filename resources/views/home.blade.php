@@ -25,7 +25,7 @@
 
     @include("layouts.nav")
 
-    @include("layouts.sidebar", ['user' => $user])
+    @include("layouts.sidebar")
 
 
     <div class="main_body">

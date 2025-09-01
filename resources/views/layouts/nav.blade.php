@@ -84,7 +84,7 @@
     <h2 style="margin-left: 60px;">Dashboard</h2>
 
     <div class="nav_icons">
-        @if (Route::currentRouteName() == "/")
+        @if (Route::currentRouteName() == "home")
             <div class="cart_icon">
                 <i class="fa-solid fa-cart-shopping" id="cart_button"></i>
                 <div class="cart_menu display_none">
@@ -108,7 +108,7 @@
                     @endif
                     <form class="checkout" method="post" action="{{route("checkout")}}">
                         @csrf
-                        <input type="hidden" name="id" value="{{$user->id}}">
+                        <input type="hidden" name="id" value="{{auth()->user()->id}}">
                         <button type="submit">Checkout</button>
                     </form>
                 </div>

@@ -10,37 +10,32 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use \App\Http\Controllers\VerifyPayment;
+use App\Http\Middleware\auth;
+use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\isAuthentecated;
 use Illuminate\Support\Facades\Route;
 
 // Main Routes
-Route::get("/", [IndexController::class, "showProducts"])->name("/")->middleware('checkUser');
+Route::middleware([auth::class])->group(function () {
+    Route::get("/", [IndexController::class, "index"])->name("home");
+    Route::resource('/cart', CartController::class);
+    Route::post("/checkout", [CheckoutController::class, "index"])->name("checkout");
+    Route::get('/payments/verify/{payment}', [VerifyPayment::class, "handleCallback"])->name('verify-payment');
 
-Route::get('/dashboard', [AdminController::class, "index"])->middleware('checkUser')->middleware("isAdmin")->name('dashboard');
-
-Route::resource("/dashboard/products", ProductsController::class);
-
-Route::get("/dashboard/users", [UserController::class, 'index'])->name("dashboard.users");
-Route::get("/dashboard/users/edit/{id}", [UserController::class, 'edit'])->name("dashboard.users.edit");
-Route::post("/dashboard/users/update", [UserController::class, 'update'])->name("dashboard.users.update");
-
-Route::resource('/cart', CartController::class);
-
-Route::post("/checkout", [CheckoutController::class, "index"])->name("checkout");
-
-Route::get('/payments/verify/{payment?}' , [VerifyPayment::class, "handleCallback"])->name('verify-payment');
+    // access to dashboard
+    Route::middleware([isAdmin::class])->group(function () {
+        Route::get('/dashboard', [AdminController::class, "index"])->name('dashboard');
+        Route::resource("/dashboard/products", ProductsController::class);
+        Route::resource("/dashboard/users", UserController::class);
+    });
+});
 
 // Auth
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::post("/login/handle", [LoginController::class, 'checkUser'])->name('login.handle');
-
-Route::get("/register", function () {
-    return view('auth.register');
-})->name('register');
-
-Route::post('register/handle', [RegisterController::class, 'createUser'])->name('register.handle');
-
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::middleware([isAuthentecated::class])->group(function () {
+    Route::get("/register", [RegisterController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+    Route::get('/login', [LoginController::class, "showLoginForm"])->name('login');
+    Route::post("/login", [LoginController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+});
 

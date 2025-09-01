@@ -4,7 +4,7 @@
 
 @section("content")
 
-    <form action="{{ route('register.handle') }}" method="post" class="form">
+    <form action="{{ route('register.submit') }}" method="post" class="form">
     @csrf
     <h1>Register!</h1>
     <div class="form-inputs">

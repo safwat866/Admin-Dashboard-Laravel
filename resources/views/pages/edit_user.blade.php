@@ -48,14 +48,14 @@
 
     <h2>تعديل بيانات المستخدم</h2>
 
-    <form action="{{route("dashboard.users.update")}}" method="POST" class="product_form">
-        <input type="hidden" value="{{$current_user->id}}" name="id">
+    <form action="{{route("users.update", $user->id)}}" method="POST" class="product_form">
         @csrf
+        @method("PUT")
         <div class="product_formEdit">
             <div class="inputs_group">
                 <div class="input_holder">
                     <label for="">اسم المستخدم</label>
-                    <input type="text" class="input" value="{{$current_user->username}}" name="name">
+                    <input type="text" class="input" value="{{$user->username}}" name="username">
                 </div>
                 <select name="role" class="input" >
                     <option value="0">مستخدم</option>
@@ -63,11 +63,11 @@
                 </select>
                 <div class="input_holder">
                     <label for="">الايميل</label>
-                    <input type="email" class="input" name="email" value="{{$current_user->email}}" />
+                    <input type="email" class="input" name="email" value="{{$user->email}}" />
                 </div>
                 <div class="input_holder">
                     <label for="">الرصيد</label>
-                    <input type="number" class="input" value="{{$current_user->cash}}" name="balance">
+                    <input type="number" class="input" value="{{$user->cash}}" name="balance">
                 </div>
             </div>
         </div>

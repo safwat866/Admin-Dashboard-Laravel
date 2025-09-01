@@ -14,22 +14,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $userId = Cookie::get('user_id');
-        $user = User::where("id", $userId)->first();
-
         $products = Products::all();
-        return view("pages.products", [
-            'user' => $user,
-            'products' => $products,
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view("pages.products", compact("products"));
     }
 
     /**
@@ -48,24 +34,11 @@ class ProductsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Products $products)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Products $product)
     {
-        $userId = Cookie::get('user_id');
-        $user = User::where("id", $userId)->first();
-        return view("pages.product_edit", [
-            'user' => $user,
-            'product' => $product,
-        ]);
+        return view("pages.product_edit", compact("product"));
     }
 
     /**

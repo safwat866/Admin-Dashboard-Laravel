@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Middleware\auth;
 use App\Http\Middleware\CheckUser;
 use App\Http\Middleware\DashboardMiddleWare;
+use App\Http\Middleware\isAuthentecated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,8 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'checkUser' => CheckUser::class,
-            'isAdmin' => DashboardMiddleWare::class,
+            "auth" => auth::class,
+            "isAuthenticated" => isAuthentecated::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

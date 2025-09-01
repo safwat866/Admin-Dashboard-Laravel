@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Cart;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable implements AuthenticatableContract
 {
-    protected $fillable = ['username', 'email', 'password', 'cash'];
+    protected $fillable = ['username', 'email', 'password', 'cash', "is_admin"];
 
-    public function cart() {
+    public function cartItems()
+    {
         return $this->hasMany(Cart::class);
     }
 
