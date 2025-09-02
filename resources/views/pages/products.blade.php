@@ -67,7 +67,7 @@
         }
 
         .addProduct_form {
-            width: 400px;
+            max-width: 400px;
         }
 
         .display_none {
@@ -100,43 +100,46 @@
 
         </script>
 
-        <table class="bordered-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>اسم المنتج</th>
-                    <th>وصف المنتج</th>
-                    <th>سعر المنتج </th>
-                    <th>صورة المنتج المنتج </th>
-                    <th>عمليات</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($products as $product)
+        <div class="table_container">
+            <table class="bordered-table">
+                <thead>
                     <tr>
-                        <th>{{$product->id}}</th>
-                        <th>{{$product->product_name}}</th>
-                        <th>{{$product->product_description}}</th>
-                        <th>{{$product->product_price}}$</th>
-                        <th><img src="{{$product->product_image}}" class="product_image" alt="{{$product->product_name}}"></th>
-                        <th>
-                            <div class="buttons_wrapper">
-                                <form action="{{route("products.edit", $product->id)}}" method="get">
-                                    @csrf
-                                    <button type="submit" class="table_btn edit">Edit</button>
-                                </form>
-                                <form action="{{route('products.destroy', $product->id)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="table_btn delete">Delete</button>
-                                </form>
-                            </div>
-                        </th>
-
+                        <th>#</th>
+                        <th>اسم المنتج</th>
+                        <th>وصف المنتج</th>
+                        <th>سعر المنتج </th>
+                        <th>صورة المنتج المنتج </th>
+                        <th>عمليات</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($products as $product)
+                        <tr>
+                            <th>{{$product->id}}</th>
+                            <th>{{$product->product_name}}</th>
+                            <th>{{$product->product_description}}</th>
+                            <th>{{$product->product_price}}$</th>
+                            <th><img src="{{$product->product_image}}" class="product_image" alt="{{$product->product_name}}">
+                            </th>
+                            <th>
+                                <div class="buttons_wrapper">
+                                    <form action="{{route("products.edit", $product->id)}}" method="get">
+                                        @csrf
+                                        <button type="submit" class="table_btn edit">Edit</button>
+                                    </form>
+                                    <form action="{{route('products.destroy', $product->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="table_btn delete">Delete</button>
+                                    </form>
+                                </div>
+                            </th>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
 

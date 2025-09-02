@@ -5,7 +5,7 @@
 @section("main_content")
 
     <style>
-       .bordered-table {
+        .bordered-table {
             width: 100%;
             border-collapse: collapse;
             font-family: sans-serif;
@@ -67,20 +67,22 @@
         .display_none {
             display: none;
         }
-         .buttons_wrapper {
+
+        .buttons_wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
         }
     </style>
 
+    <div class="table_container">
         <table class="bordered-table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>اسم المستخدم</th>
                     <th>الاميل</th>
-                    <th>  الصلاحية </th>
+                    <th> الصلاحية </th>
                     <th>الرصيد</th>
                     <th>عمليات</th>
                 </tr>
@@ -110,5 +112,6 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 
 @endsection

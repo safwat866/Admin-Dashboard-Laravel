@@ -17,7 +17,13 @@
             height: 100vh;
             background: #fff;
             direction: rtl;
+            transition: margin-right .2s;
         }
+        @media only screen and (max-width: 1000px) {
+        .main_body {
+            margin-right: 0;
+        }
+    }
     </style>
 @endpush
 

@@ -6,12 +6,13 @@
         .product_formEdit {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .inputs_group {
             display: flex;
             flex-direction: column;
-            width: 400px;
+            min-width: 400px;
             margin-right: 70px;
         }
 
@@ -41,6 +42,17 @@
             align-items: baseline;
             max-width: 800px;
             margin: auto;
+        }
+        @media only screen and (max-width: 800px) {
+            .product_formEdit {
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+            }
+            .inputs_group {
+                margin-right: 0;
+                margin-top: 20px;
+            }
         }
     </style>
 

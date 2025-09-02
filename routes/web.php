@@ -20,7 +20,6 @@ Route::middleware([auth::class])->group(function () {
     Route::get("/", [IndexController::class, "index"])->name("home");
     Route::resource('/cart', CartController::class);
     Route::post("/checkout", [CheckoutController::class, "index"])->name("checkout");
-    Route::get('/payments/verify/{payment}', [VerifyPayment::class, "handleCallback"])->name('verify-payment');
 
     // access to dashboard
     Route::middleware([isAdmin::class])->group(function () {
@@ -36,6 +35,6 @@ Route::middleware([isAuthentecated::class])->group(function () {
     Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
     Route::get('/login', [LoginController::class, "showLoginForm"])->name('login');
     Route::post("/login", [LoginController::class, 'login'])->name('login.submit');
-    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');

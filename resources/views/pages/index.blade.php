@@ -11,8 +11,8 @@
         }
 
         .products {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             width: 100%;
         }
@@ -62,14 +62,14 @@
 
     @include("layouts.nav", [
     "cart" => $cartItems,
-    ])
+])
 
     <main>
         @error("balance")
         <h1 style="color: red;">{{$message}}</h1>
         @enderror
         <div style="display: flex; align-items: center; gap: 20px;">
-            <h1>User Balance: {{auth()->user()->cash}}$</h1>
+            <h1>User Balance: {{auth()->user()->cash}} EGP</h1>
             <a href="">Charge</a>
         </div>
         <div class="products">

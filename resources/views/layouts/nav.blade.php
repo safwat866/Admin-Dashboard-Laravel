@@ -16,7 +16,7 @@
         box-sizing: content-box;
     }
 
-    .cart_icon >i:hover {
+    .cart_icon>i:hover {
         background-color: #0e645c;
         color: #fff;
     }
@@ -77,6 +77,37 @@
         border: none;
         cursor: pointer;
     }
+
+    .menu {
+        margin-right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu:hover {
+        background: #0e645c;
+        color: #fff;
+        border-radius: 50%;
+    }
+
+    @media only screen and (min-width: 1000px) {
+        .menu {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        h2 {
+            margin-left: 20px !important;
+        }
+        .logout {
+            margin-right: 20px !important;
+        }
+    }
 </style>
 
 
@@ -115,7 +146,11 @@
             </div>
         @endif
 
-
+        @if (Route::currentRouteName() != "home")
+            <div class="menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        @endif
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="logout">Logout</button>
@@ -131,4 +166,5 @@
     cart_button.addEventListener("click", () => {
         cart_menu.classList.toggle("display_none")
     })
+
 </script>
