@@ -94,6 +94,10 @@
         border-radius: 50%;
     }
 
+    button:disabled {
+        background-color: #a3acb1;
+    }
+
     @media only screen and (min-width: 1000px) {
         .menu {
             display: none;
@@ -104,6 +108,7 @@
         h2 {
             margin-left: 20px !important;
         }
+
         .logout {
             margin-right: 20px !important;
         }
@@ -111,11 +116,11 @@
 </style>
 
 
-<nav>
+<nav class="p-3">
     <h2 style="margin-left: 60px;">Dashboard</h2>
 
     <div class="nav_icons">
-        @if (Route::currentRouteName() == "home")
+        @if (Route::currentRouteName() == 'home')
             <div class="cart_icon">
                 <i class="fa-solid fa-cart-shopping" id="cart_button"></i>
                 <div class="cart_menu display_none">
@@ -137,16 +142,17 @@
                     @else
                         <p style="text-align: center;">There is no Items to show!</p>
                     @endif
-                    <form class="checkout" method="post" action="{{route("checkout")}}">
+                    <form class="checkout" method="post" action="{{route("checkout")}}" id="checkout">
                         @csrf
                         <input type="hidden" name="id" value="{{auth()->user()->id}}">
-                        <button type="submit">Checkout</button>
+                        <button type="submit" disabled id="checkoutBtn">Checkout</button>
                     </form>
                 </div>
             </div>
         @endif
 
-        @if (Route::currentRouteName() != "home")
+
+        @if (request()->is("dashboard*"))
             <div class="menu">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -167,4 +173,20 @@
         cart_menu.classList.toggle("display_none")
     })
 
+    @if (Route::currentRouteName() == 'home')
+        const checkoutBtn = document.getElementById("checkoutBtn");
+        let cartItemsCount = {{count($cart)}}
+
+            console.log(cartItemsCount)
+
+        if (cartItemsCount > 0) {
+            checkoutBtn.removeAttribute("disabled");
+        }
+
+        document.getElementById("checkout").onsubmit = function (e) {
+            if (cartItemsCount == 0) {
+                e.preventDefault();
+            }
+        }
+    @endif
 </script>

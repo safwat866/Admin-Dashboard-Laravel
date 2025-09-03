@@ -126,3 +126,17 @@ button {
 .table_container {
     overflow-x: auto;
 }
+
+h1 {
+    font-size: 33px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 19px;
+}

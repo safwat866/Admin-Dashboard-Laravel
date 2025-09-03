@@ -60,38 +60,38 @@
 
 @section("content")
 
-    @include("layouts.nav", [
-    "cart" => $cartItems,
-])
+        @include("layouts.nav", [
+        "cart" => $cartItems,
+    ])
 
-    <main>
-        @error("balance")
-        <h1 style="color: red;">{{$message}}</h1>
-        @enderror
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <h1>User Balance: {{auth()->user()->cash}} EGP</h1>
-            <a href="">Charge</a>
-        </div>
-        <div class="products">
-            @foreach ($products as $product)
-            <div class="product">
-                <div class="image_container">
-                    <img src="{{$product->product_image}}" alt="">
-                </div>
-                <div class="product_content">
-                    <h3>{{$product->product_name}}</h3>
-                    <p>{{$product->product_description}}</p>
-                    <p>{{$product->product_price}}$</p>
-                    <form action="{{route("cart.store")}}" method="POST">
-                        @csrf
-                        <input type="hidden" name="user" value="{{auth()->user()->id}}">
-                        <input type="hidden" name="product" value='{{$product->id}}'>
-                        <button class="add_to_cart">Add to Cart</button>
-                    </form>
-                </div>
+        <main>
+            @error("balance")
+            <h1 class="text-red-600">{{$message}}</h1>
+            @enderror
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <h1 class="mb-3 px-3 md:px-24">User Balance: {{auth()->user()->cash}}$</h1>
+                {{-- <a href="">Charge</a> --}}
             </div>
-            @endforeach
-        </div>
-    </main>
+            <div class="products px-3 !gap-8 md:px-24">
+                @foreach ($products as $product)
+                <div class="product">
+                    <div class="image_container">
+                        <img src="{{$product->product_image}}" alt="">
+                    </div>
+                    <div class="product_content">
+                        <h3>{{$product->product_name}}</h3>
+                        <p>{{$product->product_description}}</p>
+                        <p>{{$product->product_price}}$</p>
+                        <form action="{{route("cart.store")}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user" value="{{auth()->user()->id}}">
+                            <input type="hidden" name="product" value='{{$product->id}}'>
+                            <button class="add_to_cart mt-3">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </main>
 
 @endsection

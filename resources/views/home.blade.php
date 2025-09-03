@@ -4,14 +4,11 @@
 
 @push("styles")
     <style>
-        h1 {
-            text-align: center
-        }
         h2 {
             margin-left: 60px;
         }
         .main_body {
-            margin-right: 300px;
+            margin-right: 280px;
             margin-top: 75px;
             padding: 20px;
             height: 100vh;

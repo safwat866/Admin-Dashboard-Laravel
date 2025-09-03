@@ -52,7 +52,6 @@
             text-decoration: none;
             border: none;
             padding: 10px 17px;
-            background: #0e645c;
             border-radius: 0.25em;
             color: white;
             display: block;
@@ -75,10 +74,18 @@
         }
     </style>
 
+    <h1 class="text-right !text-2xl mb-3">قائمة المستخدمين</h1>
+
+    <div class="flex gap-3">
+        <button class="add_new_product bg-teal-800 hover:bg-teal-900 transition-colors" id="showBtn"> اضافة مستخدم </button>
+        <button class="add_new_product bg-rose-600 hover:bg-rose-700 transition-colors" id="showBtn"> حذف </button>
+    </div>
+
     <div class="table_container">
         <table class="bordered-table">
             <thead>
                 <tr>
+                    <th><input type="checkbox" name="" id=""></th>
                     <th>#</th>
                     <th>اسم المستخدم</th>
                     <th>الاميل</th>
@@ -90,6 +97,7 @@
             <tbody>
                 @foreach($users as $user)
                     <tr>
+                        <th><input type="checkbox" name="" id=""></th>
                         <th>{{$user->id}}</th>
                         <th>{{$user->username}}</th>
                         <th>{{$user->email}}</th>

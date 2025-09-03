@@ -42,10 +42,6 @@
             align-items: center;
         }
 
-        .edit {
-            background-color: #4caf50;
-        }
-
         .delete {
             background-color: #d71859;
         }
@@ -58,7 +54,6 @@
             text-decoration: none;
             border: none;
             padding: 10px 17px;
-            background: #0e645c;
             border-radius: 0.25em;
             color: white;
             display: block;
@@ -76,8 +71,11 @@
     </style>
 
     <div style="direction: rtl">
-        <h2>قائمة المنتجات</h2>
-        <button class="add_new_product" id="showBtn"> اضافة منتج </button>
+        <h2 class="mb-3">قائمة المنتجات</h2>
+       <div class="flex gap-3">
+        <button class="add_new_product bg-teal-800 hover:bg-teal-900 transition-colors" id="showBtn"> اضافة منتج </button>
+        <button class="add_new_product bg-rose-600 hover:bg-rose-700 transition-colors" id="showBtn">  حذف </button>
+       </div>
 
         <form action="{{route("products.store")}}" class="addProduct_form display_none" method="post">
             @csrf
@@ -104,33 +102,35 @@
             <table class="bordered-table">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" name="" id=""></th>
                         <th>#</th>
+                        <th>صورة المنتج  </th>
                         <th>اسم المنتج</th>
                         <th>وصف المنتج</th>
                         <th>سعر المنتج </th>
-                        <th>صورة المنتج المنتج </th>
                         <th>عمليات</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($products as $product)
                         <tr>
+                            <th><input type="checkbox" name="" id=""></th>
                             <th>{{$product->id}}</th>
+                            <th class="flex justify-center"><img src="{{$product->product_image}}" class="product_image max-w-max" alt="{{$product->product_name}}">
                             <th>{{$product->product_name}}</th>
                             <th>{{$product->product_description}}</th>
                             <th>{{$product->product_price}}$</th>
-                            <th><img src="{{$product->product_image}}" class="product_image" alt="{{$product->product_name}}">
                             </th>
                             <th>
                                 <div class="buttons_wrapper">
                                     <form action="{{route("products.edit", $product->id)}}" method="get">
                                         @csrf
-                                        <button type="submit" class="table_btn edit">Edit</button>
+                                        <button type="submit" class="table_btn bg-green-600">Edit</button>
                                     </form>
                                     <form action="{{route('products.destroy', $product->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="table_btn delete">Delete</button>
+                                        <button type="submit" class="table_btn bg-rose-600">Delete</button>
                                     </form>
                                 </div>
                             </th>

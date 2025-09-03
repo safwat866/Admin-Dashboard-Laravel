@@ -3,7 +3,7 @@
         position: fixed;
         top: 67px;
         right: 0;
-        width: 300px;
+        width: 280px;
         height: calc(100vh - 67px);
         background-color: #152027;
         color: #fff;
@@ -36,7 +36,10 @@
 
     .link {
         text-align: center;
-        padding-block: 13px;
+        padding-block: 10px;
+        border-radius: 5px;
+        display: block;
+        margin-bottom: 10px;
     }
 
     .link:hover {
@@ -72,21 +75,23 @@
             <p style='font-size: 14px; color: #aaaaaa;'>{{auth()->user()->email}}</p>
         </div>
     </div>
-    <div class="links">
-        <div class="link {{Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
-            <a href="{{route("dashboard")}}">
+    <div class="links px-4">
+        <div >
+            <a href="{{route("dashboard")}}" class="link {{Route::currentRouteName() == 'dashboard' ? 'active' : '' }} transition-colors">
                 <div class="icon"></div>
                 <div class="title"> الرئيسية</div>
             </a>
         </div>
-        <div class="link {{Route::currentRouteName() == 'products.index' ? 'active' : '' }}">
-            <a href="{{route("products.index")}}">
+        <div >
+            <a href="{{route("products.index")}}"
+                class="link transition-colors {{Route::currentRouteName() == 'products.index' ? 'active' : '' }}">
                 <div class="icon"></div>
                 <div class="title">قائمة المنتجات</div>
             </a>
         </div>
-        <div class="link {{Route::currentRouteName() == 'users.index' ? 'active' : '' }}">
-            <a href="{{route("users.index")}}">
+        <div >
+            <a href="{{route("users.index")}}"
+                class="link transition-colors {{Route::currentRouteName() == 'users.index' ? 'active' : '' }}">
                 <div class="icon"></div>
                 <div class="title">قائمة المستخدمين</div>
             </a>

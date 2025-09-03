@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerifyCheckoutController;
 use \App\Http\Controllers\VerifyPayment;
 use App\Http\Middleware\auth;
 use App\Http\Middleware\isAdmin;
@@ -20,7 +21,7 @@ Route::middleware([auth::class])->group(function () {
     Route::get("/", [IndexController::class, "index"])->name("home");
     Route::resource('/cart', CartController::class);
     Route::post("/checkout", [CheckoutController::class, "index"])->name("checkout");
-
+    Route::get("/verify-chekcout", [VerifyCheckoutController::class, "index"])->name("verify-checkout");
     // access to dashboard
     Route::middleware([isAdmin::class])->group(function () {
         Route::get('/dashboard', [AdminController::class, "index"])->name('dashboard');
