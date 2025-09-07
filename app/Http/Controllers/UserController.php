@@ -29,11 +29,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if ($request->file("image")) {
+            $imageName = $request->file("image")->getClientOriginalName() || "";
+            $path = $request->file("image")->storeAs("users", $imageName, 'public_user');
+        }
+
         $user->update([
             'username' => $request->username,
             "email" => $request->email,
             "is_admin" => $request->role,
             "cash" => (float) $request->balance,
+            "image" => $request->file("image") ? $path : $user->image,
         ]);
 
         return redirect()->route("users.index");
@@ -45,6 +51,12 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        return redirect()->route("users.index");
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        User::destroy($request->products);
         return redirect()->route("users.index");
     }
 }

@@ -55,6 +55,25 @@
         background-color: #424951;
     }
 
+    .image_container {
+        width: 60px;
+        height: 60px;
+        position: relative;
+        background-color: #eee;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .image_container>img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+    }
+
     @media only screen and (max-width: 1000px) {
         .sidebar {
             right: -300px;
@@ -69,27 +88,37 @@
 
 <div class="sidebar">
     <div class="account_info">
-        <div class="user_image"></div>
+        <div class="image_container">
+            <img src="{{asset("images/".auth()->user()->image)}}" alt="">
+        </div>
         <div class="user_info">
             <h3 style="font-size: 18px; margin-block: 8px;">{{auth()->user()->username}}</h3>
             <p style='font-size: 14px; color: #aaaaaa;'>{{auth()->user()->email}}</p>
         </div>
     </div>
     <div class="links px-4">
-        <div >
-            <a href="{{route("dashboard")}}" class="link {{Route::currentRouteName() == 'dashboard' ? 'active' : '' }} transition-colors">
+        <div>
+            <a href="{{route("dashboard")}}"
+                class="link {{Route::currentRouteName() == 'dashboard' ? 'active' : '' }} transition-colors">
                 <div class="icon"></div>
                 <div class="title"> الرئيسية</div>
             </a>
         </div>
-        <div >
+        <div>
+            <a href="{{route("profile")}}"
+                class="link {{Route::currentRouteName() == 'profile' ? 'active' : '' }} transition-colors">
+                <div class="icon"></div>
+                <div class="title"> البروفايل</div>
+            </a>
+        </div>
+        <div>
             <a href="{{route("products.index")}}"
                 class="link transition-colors {{Route::currentRouteName() == 'products.index' ? 'active' : '' }}">
                 <div class="icon"></div>
                 <div class="title">قائمة المنتجات</div>
             </a>
         </div>
-        <div >
+        <div>
             <a href="{{route("users.index")}}"
                 class="link transition-colors {{Route::currentRouteName() == 'users.index' ? 'active' : '' }}">
                 <div class="icon"></div>

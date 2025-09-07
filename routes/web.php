@@ -6,7 +6,9 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProductsBulkDelete;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifyCheckoutController;
@@ -26,7 +28,11 @@ Route::middleware([auth::class])->group(function () {
     Route::middleware([isAdmin::class])->group(function () {
         Route::get('/dashboard', [AdminController::class, "index"])->name('dashboard');
         Route::resource("/dashboard/products", ProductsController::class);
+        Route::post("/dashboard/products/bulk-delete", [ProductsController::class, "bulkDelete"])->name("products-bulk-delete");
         Route::resource("/dashboard/users", UserController::class);
+        Route::post("/dashboard/users/bulk-delete", [UserController::class, "bulkDelete"])->name("users-bulk-delete");
+        Route::get("/dashboard/profile" , function () {return view("pages.user_profile");})->name("profile");
+        Route::post("/dashboard/profile", [ProfileController::class, "index"])->name("profile");
     });
 });
 

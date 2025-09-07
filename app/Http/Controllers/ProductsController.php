@@ -63,4 +63,10 @@ class ProductsController extends Controller
         $product->delete();
         return redirect()->route('products.index');
     }
+
+    public function bulkDelete(Request $request)
+    {
+        Products::destroy($request->products);
+        return redirect()->route("products.index");
+    }
 }

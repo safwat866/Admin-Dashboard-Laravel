@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Cookie;
 class AdminController extends Controller
 {
     public function index() {
-        return view("pages.dashboard");
+        $usersCount = count(User::all());
+        $adminsCount = count(User::where("is_admin", 1)->get());
+        return view("pages.dashboard", compact('usersCount', "adminsCount"));
     }
 }

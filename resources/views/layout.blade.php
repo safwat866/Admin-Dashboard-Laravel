@@ -29,8 +29,8 @@
 
   @yield('content')
 
-  @stack('scripts')
   <script src=" {{asset("js/jquery.js")}} "></script>
+  @stack('scripts')
 </body>
 
 </html>

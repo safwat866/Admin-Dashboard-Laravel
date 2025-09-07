@@ -78,15 +78,20 @@
 
     <div class="flex gap-3">
         <button class="add_new_product bg-teal-800 hover:bg-teal-900 transition-colors" id="showBtn"> اضافة مستخدم </button>
-        <button class="add_new_product bg-rose-600 hover:bg-rose-700 transition-colors" id="showBtn"> حذف </button>
+        <form action="{{route("users-bulk-delete")}}" method="post" id="bulk_delete">
+            @csrf
+            <button class="add_new_product bg-rose-600 hover:bg-rose-700 transition-colors !hidden" id="delete_product_main"> حذف
+            </button>
+        </form>
     </div>
 
     <div class="table_container">
         <table class="bordered-table">
             <thead>
                 <tr>
-                    <th><input type="checkbox" name="" id=""></th>
+                    <th><input type="checkbox" name="" id="main_checkbox"></th>
                     <th>#</th>
+                    <th>الصورة</th>
                     <th>اسم المستخدم</th>
                     <th>الاميل</th>
                     <th> الصلاحية </th>
@@ -97,8 +102,9 @@
             <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <th><input type="checkbox" name="" id=""></th>
+                        <th><input type="checkbox" name="" class="product_checkbox" value="{{$user->id}}"></th>
                         <th>{{$user->id}}</th>
+                        <th class="flex justify-center"><img src="{{asset('images/'. $user->image)}}" class="w-14" /></th>
                         <th>{{$user->username}}</th>
                         <th>{{$user->email}}</th>
                         <th>{{$user->is_admin == 0 ? "user" : "Admin"}}</th>
@@ -123,3 +129,53 @@
     </div>
 
 @endsection
+
+@push("scripts")
+    <script>
+        $("#main_checkbox").on("change", function (e) {
+            if ($(this).is(':checked')) {
+                $(".product_checkbox").prop("checked", true)
+                $(".product_checkbox").closest("tr").addClass("bg-blue-100");
+                $("#delete_product_main").removeClass("!hidden");
+            } else {
+                $(".product_checkbox").prop("checked", false)
+                $(".product_checkbox").closest("tr").removeClass("bg-blue-100");
+                $("#delete_product_main").addClass("!hidden");
+            }
+        })
+
+        $(".product_checkbox").on("change", function (event) {
+            const checked = $(".product_checkbox:checked");
+            if ($(this).is(':checked')) {
+                $(event.target).closest("tr").addClass("bg-blue-100");
+                $("#delete_product_main").removeClass("!hidden");
+            } else {
+                if (checked.length == 0) {
+                    $("#delete_product_main").addClass("!hidden");
+                }
+                $(event.target).closest("tr").removeClass("bg-blue-100");
+            }
+        })
+
+        $("#bulk_delete").on("submit", (e) => {
+            e.preventDefault();
+
+            let productsId = [];
+            $('.product_checkbox:checked').each(function () {
+                productsId.push($(this).val());
+            });
+
+            if (productsId.length == 0) {
+                alert("please check products to delete");
+            }
+
+            productsId.forEach((value, index) => {
+                let inputs = `<input type="hidden" name="products[]" value="${value}"/>`;
+                $("#bulk_delete").append(inputs)
+            })
+
+
+            document.getElementById("bulk_delete").submit();
+        })
+    </script>
+@endpush
