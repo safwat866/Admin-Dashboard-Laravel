@@ -31,7 +31,16 @@ class UserFactory extends Factory
             'email' => $this->faker->email(),
             'password' => bcrypt('password'), // default password
             'cash' => $this->faker->randomFloat(2, 5, 5000),
-            'is_admin' => $this->faker->randomFloat(2, 0, 1)
         ];
     }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            if (!$user->roles()->exists()) {
+                $user->assignRole('user');
+            }
+        });
+    }
+
 }

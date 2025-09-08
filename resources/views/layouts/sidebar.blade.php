@@ -89,7 +89,7 @@
 <div class="sidebar">
     <div class="account_info">
         <div class="image_container">
-            <img src="{{asset("images/".auth()->user()->image)}}" alt="">
+            <img src="{{asset("images/" . auth()->user()->image)}}" alt="">
         </div>
         <div class="user_info">
             <h3 style="font-size: 18px; margin-block: 8px;">{{auth()->user()->username}}</h3>
@@ -123,6 +123,20 @@
                 class="link transition-colors {{Route::currentRouteName() == 'users.index' ? 'active' : '' }}">
                 <div class="icon"></div>
                 <div class="title">قائمة المستخدمين</div>
+            </a>
+        </div>
+        <div>
+            <a href="{{route("admins.index")}}"
+                class="link transition-colors {{Route::currentRouteName() == 'admins.index' ? 'active' : '' }}">
+                <div class="icon"></div>
+                <div class="title">قائمة المشرفين</div>
+            </a>
+        </div>
+        <div>
+            <a href="{{route("roles.index")}}"
+                class="link transition-colors {{Route::currentRouteName() == 'roles.index' ? 'active' : '' }}">
+                <div class="icon"></div>
+                <div class="title">قائمة الصلاحيات</div>
             </a>
         </div>
     </div>

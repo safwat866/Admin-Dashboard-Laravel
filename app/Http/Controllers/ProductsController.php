@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
 class ProductsController extends Controller
@@ -23,6 +24,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can("add product")) {
+            return back()->withErrors([
+                "permession" => "You don't have permession to do this action"
+            ]);
+        }
+
         Products::create([
             'product_name' => $request->name,
             'product_description' => $request->description,
@@ -38,6 +45,12 @@ class ProductsController extends Controller
      */
     public function edit(Products $product)
     {
+        if (!Auth::user()->can("edit product")) {
+            return back()->withErrors([
+                "permession" => "You don't have permession to do this action"
+            ]);
+        }
+
         return view("pages.product_edit", compact("product"));
     }
 
@@ -60,12 +73,23 @@ class ProductsController extends Controller
      */
     public function destroy(Products $product)
     {
+        if (!Auth::user()->can("edit product")) {
+            return back()->withErrors([
+                "permession" => "You don't have permession to do this action"
+            ]);
+        }
+
         $product->delete();
         return redirect()->route('products.index');
     }
 
     public function bulkDelete(Request $request)
     {
+        if (!Auth::user()->can("edit product")) {
+            return back()->withErrors([
+                "permession" => "You don't have permession to do this action"
+            ]);
+        }
         Products::destroy($request->products);
         return redirect()->route("products.index");
     }

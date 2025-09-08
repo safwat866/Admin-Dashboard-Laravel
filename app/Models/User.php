@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements AuthenticatableContract
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
     protected $fillable = ['username', 'email', 'password', 'cash', "is_admin", "image"];
 
     public function cartItems()

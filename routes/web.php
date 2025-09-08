@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IndexController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\ProductsBulkDelete;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifyCheckoutController;
 use \App\Http\Controllers\VerifyPayment;
@@ -24,15 +26,20 @@ Route::middleware([auth::class])->group(function () {
     Route::resource('/cart', CartController::class);
     Route::post("/checkout", [CheckoutController::class, "index"])->name("checkout");
     Route::get("/verify-chekcout", [VerifyCheckoutController::class, "index"])->name("verify-checkout");
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
     // access to dashboard
-    Route::middleware([isAdmin::class])->group(function () {
-        Route::get('/dashboard', [AdminController::class, "index"])->name('dashboard');
-        Route::resource("/dashboard/products", ProductsController::class);
-        Route::post("/dashboard/products/bulk-delete", [ProductsController::class, "bulkDelete"])->name("products-bulk-delete");
-        Route::resource("/dashboard/users", UserController::class);
-        Route::post("/dashboard/users/bulk-delete", [UserController::class, "bulkDelete"])->name("users-bulk-delete");
-        Route::get("/dashboard/profile" , function () {return view("pages.user_profile");})->name("profile");
-        Route::post("/dashboard/profile", [ProfileController::class, "index"])->name("profile");
+    Route::middleware(['permission:view dashboard'])->group(function () {
+        Route::prefix('/dashboard')->group(function () {
+            Route::get('/', [AdminController::class, "index"])->name('dashboard');
+            Route::resource("/products", ProductsController::class);
+            Route::post("/products/bulk-delete", [ProductsController::class, "bulkDelete"])->name("products-bulk-delete");
+            Route::resource("/users", UserController::class);
+            Route::resource("/admins", AdminsController::class);
+            Route::post("/users/bulk-delete", [UserController::class, "bulkDelete"])->name("users-bulk-delete");
+            Route::get("/profile", [ProfileController::class, "showProfileForm"])->name("profile");
+            Route::post("/profile", [ProfileController::class, "index"])->name("profile");
+            Route::resource("/roles", RolesController::class);
+        });
     });
 });
 
@@ -43,5 +50,3 @@ Route::middleware([isAuthentecated::class])->group(function () {
     Route::get('/login', [LoginController::class, "showLoginForm"])->name('login');
     Route::post("/login", [LoginController::class, 'login'])->name('login.submit');
 });
-
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');

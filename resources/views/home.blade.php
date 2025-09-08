@@ -32,6 +32,9 @@
 
 
     <div class="main_body">
+        @error("permession")
+            <h1 class="text-red-500"> {{$message}} </h1>
+        @enderror
         @yield("main_content")
     </div>
 

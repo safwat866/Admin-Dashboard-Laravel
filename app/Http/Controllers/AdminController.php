@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function index() {
         $usersCount = count(User::all());
-        $adminsCount = count(User::where("is_admin", 1)->get());
+        $adminsCount = count(User::role('admin')->get());
         return view("pages.dashboard", compact('usersCount', "adminsCount"));
     }
 }

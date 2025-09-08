@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -21,7 +24,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view("pages.edit_user", compact("user"));
+        if (!Auth::user()->can("edit users")) {
+            return back()->withErrors([
+                "permession" => "You don't have permession to do this action"
+            ]);
+        }
+        $roles = DB::table("roles")->get();
+        return view("pages.edit_user", compact("user", "roles"));
     }
 
     /**
@@ -37,10 +46,11 @@ class UserController extends Controller
         $user->update([
             'username' => $request->username,
             "email" => $request->email,
-            "is_admin" => $request->role,
             "cash" => (float) $request->balance,
             "image" => $request->file("image") ? $path : $user->image,
         ]);
+
+        $user->syncRoles([$request->role]);
 
         return redirect()->route("users.index");
     }

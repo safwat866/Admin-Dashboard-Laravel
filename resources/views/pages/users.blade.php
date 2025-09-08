@@ -107,7 +107,7 @@
                         <th class="flex justify-center"><img src="{{asset('images/'. $user->image)}}" class="w-14" /></th>
                         <th>{{$user->username}}</th>
                         <th>{{$user->email}}</th>
-                        <th>{{$user->is_admin == 0 ? "user" : "Admin"}}</th>
+                        <th>{{$user->roles[0]->name}}</th>
                         <th>{{$user->cash}}</th>
                         <th>
                             <div class="buttons_wrapper">

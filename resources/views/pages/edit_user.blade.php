@@ -168,8 +168,9 @@
                     <div class="flex-1 flex flex-col">
                         <label for="">الصلاحية</label>
                         <select name="role" class="input">
-                            <option value="0" {{$user->is_admin == 0 ? "selected" : ""}}>مستخدم</option>
-                            <option value="1" {{$user->is_admin == 1 ? "selected" : ""}}>مسئول</option>
+                            @foreach ($roles as $role)
+                                <option value="{{$role->name}}" {{$role->name == $user->roles[0]->name ? "selected" : ""}}>{{$role->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="flex-1 flex flex-col">
