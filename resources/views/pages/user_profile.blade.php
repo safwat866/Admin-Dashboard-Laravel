@@ -88,8 +88,6 @@
         </div>
         <button type="submit" class="bg-green-600 rounded text-white mt-5 w-fit mr-auto block px-3 py-2">Update</button>
     </form>
-
-
 @endsection
 
 @push("scripts")

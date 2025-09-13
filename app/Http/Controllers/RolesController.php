@@ -92,8 +92,14 @@ class RolesController extends Controller
                 "permession" => "You don't have permession to do this action"
             ]);
         }
+        
         $role = Role::findOrFail($id);
-        $role->delete();
-        return redirect()->route("roles.index");
+
+        if ($role->users()->count() > 0) {
+            return back()->withErrors(['permession' => 'Cannot delete role. It is assigned to user.']);
+        } else {
+            $role->delete();
+            return redirect()->route("roles.index");
+        }
     }
 }

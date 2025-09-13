@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Orders;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,12 +29,18 @@ class VerifyCheckoutController extends Controller
         $userBalance = Auth::user()->cash;
 
         if ($status === 'succeeded') {
-            // empty the cart
-            Cart::truncate();
-
             Auth::user()->update([
                 'cash' => $userBalance - $amount,
             ]);
+
+            // Orders::create([
+            //     'user_id' => Auth::user()->id,
+            //     'status' => 'paid',
+            //     'amount' => a
+            // ]);
+
+            // empty the cart
+            Cart::truncate();
             
             return redirect()->route("home");
         } else {

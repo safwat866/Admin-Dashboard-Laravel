@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsBulkDelete;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -28,6 +29,7 @@ Route::middleware([auth::class])->group(function () {
     Route::get("/verify-chekcout", [VerifyCheckoutController::class, "index"])->name("verify-checkout");
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
     // access to dashboard
+    
     Route::middleware(['permission:view dashboard'])->group(function () {
         Route::prefix('/dashboard')->group(function () {
             Route::get('/', [AdminController::class, "index"])->name('dashboard');
@@ -39,6 +41,7 @@ Route::middleware([auth::class])->group(function () {
             Route::get("/profile", [ProfileController::class, "showProfileForm"])->name("profile");
             Route::post("/profile", [ProfileController::class, "index"])->name("profile");
             Route::resource("/roles", RolesController::class);
+            Route::resource("/orders", OrdersController::class);
         });
     });
 });
