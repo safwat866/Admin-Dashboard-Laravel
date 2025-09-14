@@ -45,7 +45,7 @@
         <h2>اهلا</h2>
         <div class="flex gap-3 flex-wrap">
             <div
-                class="relative flex flex-col items-center bg-neutral-100 w-fit py-2 px-5 mt-4 rounded-2xl border-gray-300 border overflow-hidden">
+                class="relative flex flex-col items-center border border-gray-300 rounded border-b-3 border-b-amber-700 bg-neutral-50 p-4 overflow-hidden">
                 <div class="loading-overlay"></div>
                 <div class="loading">
                     <div class="spinner"></div>
@@ -63,24 +63,24 @@
                 </div>
             </div>
             @can('edit product')
-                <div class="flex flex-col items-center bg-neutral-100 w-fit py-2 px-5 mt-4 rounded-2xl border-gray-300 border">
+                <div class="flex flex-col items-center border border-gray-300 rounded border-b-3 border-b-emerald-700 bg-neutral-50 p-4">
                     <h2>الارباح</h2>
                     <h2 class="text-center mt-5 w-full !ml-0"><span>3439</span>$</h2>
                     <a href="" class="underline mt-4">عرض البيانات</a>
                 </div>
             @endcan
-            <div class="flex flex-col items-center bg-neutral-100 w-fit py-2 px-5 mt-4 rounded-2xl border-gray-300 border">
+            <div class="flex flex-col items-center border border-gray-300 rounded border-b-3 border-b-fuchsia-700 bg-neutral-50 p-4">
                 <h2>عدد المستخدمين</h2>
                 <h2 class="text-center mt-5 w-full !ml-0">{{$usersCount}} مستخدم</h2>
                 <a href="{{route("users.index")}}" class="underline mt-4">عرض البيانات</a>
             </div>
-            <div class="flex flex-col items-center bg-neutral-100 w-fit py-2 px-5 mt-4 rounded-2xl border-gray-300 border">
+            <div class="flex flex-col items-center border border-gray-300 rounded border-b-3 border-b-red-700 bg-neutral-50 p-4">
                 <h2>عدد المشرفين</h2>
                 <h2 class="text-center mt-5 w-full !ml-0">{{$adminsCount}} مشرف</h2>
-                <a href="{{route("users.index")}}" class="underline mt-4">عرض البيانات</a>
+                <a href="{{route("admins.index")}}" class="underline mt-4">عرض البيانات</a>
             </div>
             @can('edit product')
-                <div class="flex flex-col items-center bg-neutral-100 w-fit py-2 px-5 mt-4 rounded-2xl border-gray-300 border">
+                <div class="flex flex-col items-center border border-gray-300 rounded border-b-3 border-b-indigo-700 bg-neutral-50 p-4">
                     <h2>عدد المنتجات المباعة</h2>
                     <h2 class="text-center mt-5 w-full !ml-0">500 منتج</h2>
                     <a href="{{route("users.index")}}" class="underline mt-4">عرض البيانات</a>

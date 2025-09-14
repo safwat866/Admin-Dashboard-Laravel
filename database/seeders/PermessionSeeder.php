@@ -28,10 +28,5 @@ class PermessionSeeder extends Seeder
             'edit users',
             'edit roles'
         ]);
-
-        $superUser = Role::firstOrCreate(['name' => 'superUser']);
-        $superUser->givePermissionTo([
-            'view dashboard',
-        ]);
     }
 }

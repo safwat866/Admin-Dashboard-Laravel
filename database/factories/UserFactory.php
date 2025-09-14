@@ -38,7 +38,7 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) {
             if (!$user->roles()->exists()) {
-                $user->assignRole('user');
+                $user->syncRoles('user');
             }
         });
     }

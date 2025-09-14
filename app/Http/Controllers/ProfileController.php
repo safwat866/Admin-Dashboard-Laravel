@@ -17,14 +17,16 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        $imageName = $request->file("image")->getClientOriginalName();
-        $path = $request->file("image")->storeAs("users", $imageName, 'public_user');
+        if ($request->file("image")) {
+            $imageName = $request->file("image")->getClientOriginalName();
+            $path = $request->file("image")->storeAs("users", $imageName, 'public_user');
+        }
 
         Auth::user()->update([
             'username' => $request->username,
             "email" => $request->email,
             "cash" => (float) $request->balance,
-            'image' => $path,
+            'image' => $path ?? Auth::user()->image,
         ]);
 
         Auth::user()->syncRoles([$request->role]);

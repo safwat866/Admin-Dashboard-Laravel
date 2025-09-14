@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
-{    protected $fillable = [
+{  
+    use HasFactory;
+    
+    protected $fillable = [
         'product_name',
         'product_description',
         'product_price',
@@ -18,5 +23,10 @@ class Products extends Model
 
     public function order() {
         return $this->hasMany(Orders::class);
+    }
+
+    protected static function newFactory()
+    {
+        return ProductFactory::new();
     }
 }

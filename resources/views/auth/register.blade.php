@@ -9,8 +9,8 @@
     <h1>Register!</h1>
     <div class="form-inputs">
       <div class="inputs">
-        <x-input name="username" placeholder="Please Enter Your Username" name="username" />
-        <x-input name="email" placeholder="Please Enter Your Email" name="email" />
+        <x-input name="username" placeholder="Please Enter Your Username" />
+        <x-input name="email" placeholder="Please Enter Your Email" type="email" />
 
 
 

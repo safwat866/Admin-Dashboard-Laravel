@@ -77,7 +77,6 @@
     <h1 class="text-right !text-2xl mb-3">قائمة المستخدمين</h1>
 
     <div class="flex gap-3">
-        <button class="add_new_product bg-teal-800 hover:bg-teal-900 transition-colors" id="showBtn"> اضافة مستخدم </button>
         <form action="{{route("users-bulk-delete")}}" method="post" id="bulk_delete">
             @csrf
             <button class="add_new_product bg-rose-600 hover:bg-rose-700 transition-colors !hidden" id="delete_product_main"> حذف
@@ -107,7 +106,7 @@
                         <th class="flex justify-center"><img src="{{asset('images/'. $user->image)}}" class="w-14" /></th>
                         <th>{{$user->username}}</th>
                         <th>{{$user->email}}</th>
-                        <th>{{$user->roles[0]->name}}</th>
+                        <th>{{$user->roles[0]->name ?? "user"}}</th>
                         <th>{{$user->cash}}</th>
                         <th>
                             <div class="buttons_wrapper">

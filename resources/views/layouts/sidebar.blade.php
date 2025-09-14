@@ -139,13 +139,13 @@
                 <div class="title">قائمة الصلاحيات</div>
             </a>
         </div>
-        <div>
+        {{-- <div>
             <a href="{{route("orders.index")}}"
                 class="link transition-colors {{Route::currentRouteName() == 'orders.index' ? 'active' : '' }}">
                 <div class="icon"></div>
                 <div class="title">قائمة الفواتير</div>
             </a>
-        </div>
+        </div> --}}
     </div>
 </div>
 

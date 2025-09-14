@@ -43,6 +43,10 @@
             max-width: 800px;
             margin: auto;
         }
+        .product_image {
+            width: 200px;
+        }
+
         @media only screen and (max-width: 800px) {
             .product_formEdit {
                 flex-direction: column;
@@ -62,7 +66,7 @@
         @csrf
         @method('PUT')
         <div class="product_formEdit">
-            <img src="{{$product->product_image}}" alt="">
+            <img src="{{$product->product_image}}" class="product_image" alt="">
             <div class="inputs_group">
                 <div class="input_holder">
                     <label for="">Product Name:</label>
